@@ -27,6 +27,9 @@ public class SiteDao {
 	
 	EntityManagerFactory factory = Persistence.createEntityManagerFactory("JPA_Assignment");
 	EntityManager em = null;
+	
+	// Creating Entity Manager Object
+	
 	public SiteDao() {
 		em = factory.createEntityManager();
 	} 
@@ -50,9 +53,9 @@ public class SiteDao {
 	@GET
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Site findSite(@PathParam("id") int sId) {
+	public Site findSite(@PathParam("id") int siteId) {
 		em.getTransaction().begin();
-		Site site = em.find(Site.class,sId);
+		Site site = em.find(Site.class,siteId);
 		em.getTransaction().commit();
 		return site;
 	}
@@ -73,10 +76,10 @@ public class SiteDao {
 	@Path("/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Site> updateSite(@PathParam("id") int sId, Site site) {
+	public List<Site> updateSite(@PathParam("id") int siteId, Site site) {
 		
 		em.getTransaction().begin();
-		Site s = em.find(Site.class,sId);
+		Site s = em.find(Site.class,siteId);
 		s.setName(site.getName());
 		em.merge(s);
 		Query query = em.createNamedQuery("Site.findAll");
@@ -90,10 +93,10 @@ public class SiteDao {
 	@DELETE
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Site> removeSite(@PathParam("id") int sId) {
+	public List<Site> removeSite(@PathParam("id") int siteId) {
 		
 		em.getTransaction().begin();
-		Site site = em.find(Site.class, sId);
+		Site site = em.find(Site.class,siteId);
 		em.remove(site);
 		Query query = em.createNamedQuery("Site.findAll");
 		List<Site> sites = query.getResultList();
@@ -102,12 +105,12 @@ public class SiteDao {
 	}
 	public static void main(String[] args) {
 		// Creating Site Dao
-		SiteDao sitedao = new SiteDao();
-	    Site site = new Site();
-	    site.setLatitude(77.5);
-	    site.setLongitude(28.97);
-	    site.setName("Site Name");
-       // Creating Tower
+	    	SiteDao sitedao = new SiteDao();
+	    	Site site = new Site();
+	    	site.setLatitude(77.5);
+	    	site.setLongitude(28.97);
+	    	site.setName("Site Name");
+       		// Creating Tower
 		Tower tower = new Tower();
 		tower.setName("Tower Name");
 		tower.setHeight(10);
@@ -121,17 +124,19 @@ public class SiteDao {
 		equipmentObj.setPrice(13);
 		equipmentObj.setTower(tower);
 		//Adding equipment to the equipment list
-		List<Equipment> equipments = new ArrayList<Equipment>();
-		equipments.add(equipmentObj);
-		tower.setEquipments(equipments);
+		List<Equipment> equipmentlist = new ArrayList<Equipment>();
+		equipmentlist.add(equipmentObj);
+		tower.setEquipments(equipmentlist);
 		//Adding tower to the tower list
-		List<Tower> towers = new ArrayList<Tower>();
-		towers.add(tower);
-		site.setTowers(towers);		
-	  List<Site> sites = sitedao.findAllSites();
-	 // Iterating over the site list
-	 for (Site s : sites) {
-	    System.out.println(s.getId());
-	 }
+		List<Tower> towerlist = new ArrayList<Tower>();
+		towerlist.add(tower);
+		site.setTowers(towerlist);		
+		List<Site> sites = sitedao.findAllSites();
+	 
+	 
+	 	// Iterating over the site list
+	 	for (Site s : sites) {
+	    	System.out.println(s.getId());
+	 	}
 	}
 }
