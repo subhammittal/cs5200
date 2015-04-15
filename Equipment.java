@@ -18,7 +18,7 @@ public class Equipment implements Serializable {
 	private String brand;
 	private String description;	
 	@ManyToOne
-	@JoinColumn(name="tId")
+	@JoinColumn(name="towerId")
 	private Tower tower;
 	private static final long serialVersionUID = 1L;
 
