@@ -10,7 +10,7 @@ public class Tower implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "id")
-	private int tId;
+	private int towerId;
 	private String name;
 	private int height;
 	private int slides;
@@ -31,10 +31,10 @@ public class Tower implements Serializable {
 		this.equipments = equipments;
 	}  
 	public int getId() {
-		return this.tId;
+		return this.towerId;
 	}
 	public void setId(int id) {
-		this.tId = id;
+		this.towerId = id;
 	}   
 	public String getName() {
 		return this.name;
