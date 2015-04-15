@@ -10,7 +10,7 @@ public class Site implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "id")
-	private int sId;
+	private int siteId;
 	private String name;
 	private double latitude;
 	private double longitude;
@@ -21,10 +21,10 @@ public class Site implements Serializable {
 		super();
 	}
 	public int getId() {
-		return this.sId;
+		return this.siteId;
 	}
 	public void setId(int id) {
-		this.sId = id;
+		this.siteId = id;
 	}
 	public String getName() {
 		return this.name;
